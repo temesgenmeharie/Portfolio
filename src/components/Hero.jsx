@@ -7,16 +7,17 @@ import {
 } from "react-icons/si";
 
 const TECH_BADGES = [
-  { name: "React", icon: SiReact, color: "#61DAFB", bg: "rgba(97, 218, 251, 0.1)", border: "rgba(97, 218, 251, 0.2)" },
-  { name: "HTML", icon: SiHtml5, color: "#E34F26", bg: "rgba(227, 79, 38, 0.1)", border: "rgba(227, 79, 38, 0.2)" },
-  { name: "CSS", icon: SiCss3, color: "#1572B6", bg: "rgba(21, 114, 182, 0.1)", border: "rgba(21, 114, 182, 0.2)" },
-  { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38BDF8", bg: "rgba(56, 189, 248, 0.1)", border: "rgba(56, 189, 248, 0.2)" },
-  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", bg: "rgba(247, 223, 30, 0.1)", border: "rgba(247, 223, 30, 0.2)" },
-  { name: "Node.js", icon: SiNodedotjs, color: "#339933", bg: "rgba(51, 153, 51, 0.1)", border: "rgba(51, 153, 51, 0.2)" },
-  { name: "Express.js", icon: SiExpress, colorDark: "#FFFFFF", colorLight: "#333333", bg: "rgba(150, 150, 150, 0.1)", border: "rgba(150, 150, 150, 0.2)" },
-  { name: "PHP", icon: SiPhp, color: "#777BB4", bg: "rgba(119, 123, 180, 0.1)", border: "rgba(119, 123, 180, 0.2)" },
-  { name: "MySQL", icon: SiMysql, color: "#00758F", bg: "rgba(0, 117, 143, 0.1)", border: "rgba(0, 117, 143, 0.2)" },
-  { name: "Flutter", icon: SiFlutter, color: "#02569B", bg: "rgba(2, 86, 155, 0.1)", border: "rgba(2, 86, 155, 0.2)" }
+  { name: "React",       icon: SiReact,      color: "#61DAFB", labelColor: "#0ea5e9",  bg: "rgba(97, 218, 251, 0.12)",  border: "rgba(97, 218, 251, 0.25)" },
+  { name: "HTML",        icon: SiHtml5,      color: "#E34F26", labelColor: "#E34F26",  bg: "rgba(227, 79, 38, 0.1)",    border: "rgba(227, 79, 38, 0.25)" },
+  { name: "CSS",         icon: SiCss3,       color: "#1572B6", labelColor: "#1572B6",  bg: "rgba(21, 114, 182, 0.1)",   border: "rgba(21, 114, 182, 0.25)" },
+  { name: "Tailwind",    icon: SiTailwindcss,color: "#38BDF8", labelColor: "#0284c7",  bg: "rgba(56, 189, 248, 0.1)",   border: "rgba(56, 189, 248, 0.25)" },
+  { name: "JavaScript",  icon: SiJavascript, color: "#F7DF1E", labelColor: "#b45309",  bg: "rgba(247, 223, 30, 0.1)",   border: "rgba(247, 223, 30, 0.25)" },
+  { name: "Node.js",     icon: SiNodedotjs,  color: "#339933", labelColor: "#166534",  bg: "rgba(51, 153, 51, 0.1)",    border: "rgba(51, 153, 51, 0.25)" },
+  { name: "Express.js",  icon: SiExpress,    color: "#555555", labelColor: "#374151",  bg: "rgba(100, 100, 100, 0.1)",  border: "rgba(100, 100, 100, 0.2)",
+    colorDark: "#FFFFFF", labelColorDark: "rgba(255,255,255,0.85)" },
+  { name: "PHP",         icon: SiPhp,        color: "#777BB4", labelColor: "#4c4d8a",  bg: "rgba(119, 123, 180, 0.1)",  border: "rgba(119, 123, 180, 0.25)" },
+  { name: "MySQL",       icon: SiMysql,      color: "#00758F", labelColor: "#005f73",  bg: "rgba(0, 117, 143, 0.1)",    border: "rgba(0, 117, 143, 0.25)" },
+  { name: "Flutter",     icon: SiFlutter,    color: "#02569B", labelColor: "#02569B",  bg: "rgba(2, 86, 155, 0.1)",     border: "rgba(2, 86, 155, 0.25)" },
 ];
 
 export default function Hero() {
@@ -24,14 +25,26 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
+  // Reactive dark-mode state — updates whenever the theme toggle fires
+  const [isDark, setIsDark] = useState(
+    document.documentElement.classList.contains("dark")
+  );
 
   const words = ["Full Stack Developer", "Flutter Developer", "Mobile Developer"];
+
+  // Watch for dark class changes on <html>
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let timer = setTimeout(() => {
       handleType();
     }, typingSpeed);
-
     return () => clearTimeout(timer);
   }, [text, isDeleting, typingSpeed]);
 
@@ -42,34 +55,33 @@ export default function Hero() {
     if (!isDeleting) {
       setText(fullWord.substring(0, text.length + 1));
       setTypingSpeed(100);
-
       if (text === fullWord) {
-        setTypingSpeed(1500); // Pause at end of word
+        setTypingSpeed(1500);
         setIsDeleting(true);
       }
     } else {
       setText(fullWord.substring(0, text.length - 1));
       setTypingSpeed(50);
-
       if (text === "") {
         setIsDeleting(false);
         setLoopNum(loopNum + 1);
-        setTypingSpeed(500); // Pause before typing next word
+        setTypingSpeed(500);
       }
     }
   };
 
   return (
     <section id="hero" className="min-h-screen flex items-center pt-24 pb-20 relative overflow-hidden bg-[var(--bg)] transition-colors duration-300">
-      {/* Blurred Developer Workstation Background Image */}
+      {/* Blurred Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-40 filter blur-[8px] scale-105 pointer-events-none select-none z-0"
+        className="absolute inset-0 bg-cover bg-center opacity-30 dark:opacity-40 filter blur-[8px] scale-105 pointer-events-none select-none z-0"
         style={{ backgroundImage: "url('/developer-bg.png')" }}
       />
 
-      {/* Deep Green/Teal Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-emerald-400/5 to-[var(--bg)]/90 dark:from-[#022c22]/50 dark:via-[#064e3b]/30 dark:to-[#0b0a10]/90 pointer-events-none z-0 transition-colors duration-300" />
-      <div className="absolute inset-0 bg-[var(--bg)]/60 dark:bg-[#0b0a10]/60 pointer-events-none z-0 transition-colors duration-300" />
+      {/* Gradient Overlay — lighter in light mode */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/5 via-transparent to-[var(--bg)]/80 dark:from-[#022c22]/50 dark:via-[#064e3b]/30 dark:to-[#0b0a10]/90 pointer-events-none z-0 transition-colors duration-300" />
+      {/* Soft bg wash — reduced opacity in light mode so text stays visible */}
+      <div className="absolute inset-0 bg-[var(--bg)]/40 dark:bg-[#0b0a10]/60 pointer-events-none z-0 transition-colors duration-300" />
 
       <div className="section-container w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
 
@@ -80,19 +92,20 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="text-left flex flex-col justify-center"
         >
-          {/* Name in Cyan/Sky blue */}
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-sky-600 dark:text-sky-400 mb-2 font-display">
+          {/* Name — deep sky-700 in light, sky-400 in dark */}
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-sky-700 dark:text-sky-400 mb-2 font-display drop-shadow-sm">
             Temesgen Meharie
           </h1>
 
-          {/* Typing Effect: "Hey I'm..." in Green */}
+          {/* Typing Effect */}
           <div className="text-xl md:text-2xl font-bold mb-6 font-display h-8">
-            <span className="text-[var(--text-main)] transition-colors duration-300">Hey I'm </span>
-            <span className="text-emerald-500 dark:text-emerald-400">{text}</span>
-            <span className="animate-pulse text-emerald-400">|</span>
+            <span className="text-slate-800 dark:text-white transition-colors duration-300">Hey I'm </span>
+            <span className="text-emerald-600 dark:text-emerald-400">{text}</span>
+            <span className="animate-pulse text-emerald-600 dark:text-emerald-400">|</span>
           </div>
 
-          <p className="text-[var(--text-muted)] text-sm md:text-base max-w-xl mb-8 leading-relaxed">
+          {/* Description */}
+          <p className="text-slate-600 dark:text-[var(--text-muted)] text-sm md:text-base max-w-xl mb-8 leading-relaxed">
             I design and develop responsive web applications that solve real-world problems. With a passion for clean code, intuitive user experiences, and continuous learning, I turn ideas into digital products that people enjoy using.
           </p>
 
@@ -102,28 +115,25 @@ export default function Hero() {
               href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="px-6 py-2.5 bg-slate-800 border border-slate-600 text-white dark:bg-black dark:border-white/20 dark:hover:bg-white/10 dark:hover:border-white/40 hover:bg-slate-700 transition-all text-sm flex items-center gap-2"
+              className="px-6 py-2.5 bg-slate-800 border border-slate-600 text-white dark:bg-black dark:border-white/20 dark:hover:bg-white/10 dark:hover:border-white/40 hover:bg-slate-700 transition-all text-sm flex items-center gap-2 rounded-md"
             >
               <FiDownload />
               Download CV
             </a>
             <a
               href="#contact"
-              className="px-6 py-2.5 bg-slate-800 border border-slate-600 text-white dark:bg-black dark:border-white/20 dark:hover:bg-white/10 dark:hover:border-white/40 hover:bg-slate-700 transition-all text-sm flex items-center justify-center min-w-[110px]"
+              className="px-6 py-2.5 bg-slate-800 border border-slate-600 text-white dark:bg-black dark:border-white/20 dark:hover:bg-white/10 dark:hover:border-white/40 hover:bg-slate-700 transition-all text-sm flex items-center justify-center min-w-[110px] rounded-md"
             >
               Hire Me
             </a>
           </div>
 
-          {/* Tech Stack Badges Grid */}
+          {/* Tech Stack Badges */}
           <div className="flex flex-wrap gap-3 max-w-xl">
             {TECH_BADGES.map((badge, idx) => {
               const Icon = badge.icon;
-              // For badges that have separate light/dark icon colors
-              const isDark = document.documentElement.classList.contains('dark');
-              const iconColor = badge.colorDark
-                ? (isDark ? badge.colorDark : badge.colorLight)
-                : badge.color;
+              const iconColor  = isDark && badge.colorDark      ? badge.colorDark      : badge.color;
+              const labelColor = isDark && badge.labelColorDark  ? badge.labelColorDark : badge.labelColor;
               return (
                 <div
                   key={idx}
@@ -134,7 +144,7 @@ export default function Hero() {
                   }}
                 >
                   <Icon className="text-xl mb-1.5" style={{ color: iconColor }} />
-                  <span className="text-[9px] font-medium tracking-tight text-slate-700 dark:text-white/90">
+                  <span className="text-[9px] font-semibold tracking-tight" style={{ color: labelColor }}>
                     {badge.name}
                   </span>
                 </div>
@@ -143,7 +153,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Content - Avatar inside Green Blob */}
+        {/* Right Content - Avatar */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -151,10 +161,9 @@ export default function Hero() {
           className="relative flex justify-center md:justify-end items-center"
         >
           <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] flex items-center justify-center">
-            {/* Animating Organic Blob Frame behind picture */}
+            {/* Blob Frame */}
             <div className="absolute inset-0 bg-[#10B981]/15 border-2 border-[#10B981]/40 rounded-full animate-blob-bounce animate-pulse-glow z-0 filter blur-[1px]"></div>
-
-            {/* Circular Avatar Image */}
+            {/* Avatar */}
             <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden border-[6px] border-white shadow-2xl z-10 bg-[var(--card-bg)]">
               <img
                 src="/profile-placeholder.png"
