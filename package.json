@@ -1,0 +1,49 @@
+{
+  "name": "my-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "framer-motion": "^12.29.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.3.5"
+  },
+  "description": "Portfolio website for Temesgen Meharie — front-end and full-stack web developer.",
+  "main": "eslint.config.js",
+  "keywords": [
+    "portfolio",
+    "web",
+    "developer",
+    "react",
+    "vite"
+  ],
+  "author": "Temesgen Meharie",
+  "homepage": "https://github.com/temesgenmeharie/Portfolio",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/temesgenmeharie/Portfolio.git"
+  },
+  "license": "MIT"
+}

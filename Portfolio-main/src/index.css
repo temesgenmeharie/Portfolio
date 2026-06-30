@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Ultra-Premium Dark Theme */
+  --bg: #030014;
+  --card-bg: rgba(13, 10, 31, 0.6);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+
+  /* Vivid Electric Accents */
+  --accent: #00f0ff;
+  --accent2: #bf00ff;
+  --accent3: #ff006e;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --surface: rgba(255, 255, 255, 0.03);
+  
+  --shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg)] text-[var(--text-main)] font-sans antialiased overflow-x-hidden selection:bg-[var(--accent2)] selection:text-white;
+    /* subtle background pattern */
+    background-image: radial-gradient(circle at top right, rgba(191, 0, 255, 0.15), transparent 40%),
+                      radial-gradient(circle at bottom left, rgba(0, 240, 255, 0.1), transparent 40%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight font-bold;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-xl border border-[var(--border)];
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    box-shadow: var(--shadow);
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-md border border-[var(--border)] rounded-2xl;
+    background: var(--card-bg);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent)] via-[var(--accent2)] to-[var(--accent3)];
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 md:px-12 relative z-10;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--accent2), var(--accent));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+}
