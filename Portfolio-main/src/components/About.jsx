@@ -1,12 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FiCode, FiServer, FiLayout } from "react-icons/fi";
-
-const CARDS = [
-  { icon: FiLayout, title: "Frontend", desc: "Crafting responsive, accessible UIs with React & Tailwind." },
-  { icon: FiServer, title: "Backend", desc: "Building scalable APIs and handling data storage solutions." },
-  { icon: FiCode, title: "Problem Solving", desc: "Turning complex requirements into clean, maintainable code." },
-];
 
 export default function About() {
   return (
@@ -26,42 +19,32 @@ export default function About() {
             </h2>
             <div className="text-[var(--text-muted)] space-y-6 text-lg leading-relaxed font-light">
               <p>
-                Hi, I'm Temesgen, a web developer who enjoys turning ideas into practical digital solutions. I’m passionate about building clean, user-friendly applications and continuously improving my skills through real-world projects. I enjoy solving problems, learning new technologies, and creating software that makes a meaningful impact.
-
+                Hello! I&apos;m Temesgen, a software developer who enjoys turning ideas into thoughtful digital experiences. I care about building work that feels clear, useful, and meaningful for the people who use it.
               </p>
               <p>
-                {/* Fast-forward to today, and I’ve had the privilege of building software for a variety of clients.
-                My main focus these days is building accessible, inclusive products and digital experiences. */}
+                My journey in development is guided by curiosity, consistency, and a desire to keep growing with every project. I enjoy solving real problems, refining details, and shaping ideas into experiences that feel simple, polished, and practical.
+              </p>
+              <p>
+                Beyond writing code, I value learning, collaboration, and steady improvement. I&apos;m inspired by the creative energy of development and the process of building something that people can truly use and enjoy.
               </p>
             </div>
           </motion.div>
 
-          <div className="lg:w-1/2 grid gap-6 w-full">
-            {CARDS.map((card, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.15, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
-                className="p-8 rounded-2xl glass-card group relative overflow-hidden"
-              >
-                {/* Glowing Hover Effect */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent2)]/10 rounded-full blur-3xl group-hover:bg-[var(--accent)]/20 transition-colors duration-500"></div>
-                
-                <div className="relative z-10 flex items-start gap-6">
-                  <div className="p-4 bg-white/5 rounded-xl border border-white/10 group-hover:border-[var(--accent)]/30 transition-colors">
-                    <card.icon className="text-3xl text-[var(--accent)] group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl mb-2 text-white">{card.title}</h3>
-                    <p className="text-base text-[var(--text-muted)] group-hover:text-gray-300 transition-colors">{card.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="lg:w-1/2 w-full"
+          >
+            <div className="relative overflow-hidden rounded-3xl glass-card border border-white/10">
+              <img
+                src="/about-dev-inspiration.jpg"
+                alt="Development inspired workspace"
+                className="w-full h-auto max-h-[420px] object-contain bg-[#050816]"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
