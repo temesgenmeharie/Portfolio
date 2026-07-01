@@ -1,12 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FiCode, FiServer, FiLayout, FiCheckCircle } from "react-icons/fi";
-
-const CARDS = [
-  { icon: FiLayout, title: "Frontend Engineering", desc: "Crafting fluid, accessible, and responsive user interfaces with React, Next.js, and modern CSS frameworks like Tailwind." },
-  { icon: FiServer, title: "Backend Architecture", desc: "Building scalable and secure RESTful APIs and microservices with Node.js, Express, and robust database solutions." },
-  { icon: FiCode, title: "Creative Problem Solving", desc: "Transforming complex business requirements into elegant, clean, and highly maintainable codebases." },
-];
 
 export default function About() {
   return (
@@ -47,53 +40,27 @@ export default function About() {
               </p>
             </div>
 
-            {/* Quick Stats or Highlights */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="flex items-center gap-3">
-                <FiCheckCircle className="text-emerald-500 text-xl" />
-                <span className="text-[var(--text-main)] font-medium">Clean Code</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <FiCheckCircle className="text-emerald-500 text-xl" />
-                <span className="text-[var(--text-main)] font-medium">Modern Stack</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <FiCheckCircle className="text-emerald-500 text-xl" />
-                <span className="text-[var(--text-main)] font-medium">Responsive Design</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <FiCheckCircle className="text-emerald-500 text-xl" />
-                <span className="text-[var(--text-main)] font-medium">User-Centric</span>
+          </motion.div>
+
+          {/* Right Column: Profile Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:w-1/2 w-full"
+          >
+            <div className="relative mx-auto max-w-xl">
+              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-blue-500/20 via-transparent to-emerald-400/20 blur-2xl pointer-events-none" />
+              <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white/60 dark:bg-[#161a2c]/60 backdrop-blur-xl shadow-2xl">
+                <img
+                  src="/about-workspace.png"
+                  alt="Developer workspace setup"
+                  className="aspect-[4/3] w-full object-cover"
+                />
               </div>
             </div>
           </motion.div>
-
-          {/* Right Column: Cards */}
-          <div className="lg:w-1/2 w-full grid gap-6">
-            {CARDS.map((card, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.15, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="group relative p-6 md:p-8 rounded-2xl bg-white/60 dark:bg-[#161a2c]/60 backdrop-blur-xl border border-slate-200 dark:border-white/10 hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 overflow-hidden"
-              >
-                {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
-
-                <div className="relative z-10 flex flex-col sm:flex-row gap-5 items-start">
-                  <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <card.icon className="text-2xl" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl mb-2 text-[var(--text-main)]">{card.title}</h3>
-                    <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">{card.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
 
         </div>
       </div>

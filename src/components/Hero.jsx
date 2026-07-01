@@ -21,16 +21,10 @@ const TECH_BADGES = [
 ];
 
 export default function Hero() {
-  const [text, setText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
   // Reactive dark-mode state — updates whenever the theme toggle fires
   const [isDark, setIsDark] = useState(
     document.documentElement.classList.contains("dark")
   );
-
-  const words = ["Full Stack Developer", "Flutter Developer", "Mobile Developer"];
 
   // Watch for dark class changes on <html>
   useEffect(() => {
@@ -40,35 +34,6 @@ export default function Hero() {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      handleType();
-    }, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, typingSpeed]);
-
-  const handleType = () => {
-    const i = loopNum % words.length;
-    const fullWord = words[i];
-
-    if (!isDeleting) {
-      setText(fullWord.substring(0, text.length + 1));
-      setTypingSpeed(100);
-      if (text === fullWord) {
-        setTypingSpeed(1500);
-        setIsDeleting(true);
-      }
-    } else {
-      setText(fullWord.substring(0, text.length - 1));
-      setTypingSpeed(50);
-      if (text === "") {
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-        setTypingSpeed(500);
-      }
-    }
-  };
 
   return (
     <section id="hero" className="min-h-screen flex items-center pt-24 pb-20 relative overflow-hidden bg-[var(--bg)] transition-colors duration-300">
@@ -97,11 +62,10 @@ export default function Hero() {
             Temesgen Meharie
           </h1>
 
-          {/* Typing Effect */}
+          {/* Role */}
           <div className="text-xl md:text-2xl font-bold mb-6 font-display h-8">
             <span className="text-slate-800 dark:text-white transition-colors duration-300">Hey I'm </span>
-            <span className="text-emerald-600 dark:text-emerald-400">{text}</span>
-            <span className="animate-pulse text-emerald-600 dark:text-emerald-400">|</span>
+            <span className="text-emerald-600 dark:text-emerald-400">Full Stack Developer</span>
           </div>
 
           {/* Description */}

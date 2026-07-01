@@ -107,7 +107,38 @@ Visit **http://localhost:5173** in your browser to see the portfolio.
 npm run build
 ```
 
-The output will be in the `dist/` folder, ready to deploy to any static hosting (Vercel, Netlify, GitHub Pages, etc.).
+The output will be in the `dist/` folder, and the project also includes Vercel API routes in `api/` for the contact form.
+
+### Contact Form Setup
+
+Create a `.env` file from `.env.example` and set:
+
+```bash
+EMAIL_API_KEY=your_resend_api_key
+CONTACT_RECEIVER_EMAIL=your_email@example.com
+```
+
+Optional:
+
+```bash
+VITE_API_BASE_URL=
+```
+
+Leave `VITE_API_BASE_URL` empty when deploying the frontend and API together on Vercel.
+
+### Vercel Deployment
+
+This project is Vercel-ready:
+
+- Frontend: built from the Vite app in the project root
+- Backend: served by Vercel functions in `api/contact.js` and `api/health.js`
+
+On Vercel, add these environment variables to the project:
+
+- `EMAIL_API_KEY`
+- `CONTACT_RECEIVER_EMAIL`
+
+Then deploy the repository root as a single Vercel project.
 
 ---
 
@@ -119,6 +150,10 @@ Portfolio/
 │   ├── profile-placeholder.png   # Replace with your profile photo
 │   ├── resume.pdf                # Replace with your actual CV
 │   └── developer-bg.png          # Hero background image
+│
+├── api/
+│   ├── contact.js                # Vercel contact form function
+│   └── health.js                 # Vercel health check
 │
 ├── src/
 │   ├── components/
@@ -134,6 +169,7 @@ Portfolio/
 │   ├── index.css                 # Global styles & CSS variables
 │   └── main.jsx                  # App entry point
 │
+├── .env.example
 ├── package.json
 ├── tailwind.config.js
 ├── vite.config.js

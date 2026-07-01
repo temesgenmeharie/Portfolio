@@ -1,21 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMail, FiMapPin, FiPhone, FiGithub, FiLinkedin, FiSend, FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/fi";
-import emailjs from "@emailjs/browser";
-
-// ─── EmailJS config ────────────────────────────────────────────────────────────
-// 1. Go to https://www.emailjs.com and create a free account
-// 2. Add an Email Service (Gmail, Outlook, etc.) → copy the Service ID
-// 3. Create an Email Template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
-//    → copy the Template ID
-// 4. Go to Account → Public Key → copy it
-// Replace the three placeholders below:
-const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";   // e.g. "service_abc123"
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";  // e.g. "template_xyz789"
-const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";   // e.g. "abcDEFghiJKL123"
-// ───────────────────────────────────────────────────────────────────────────────
 
 const INITIAL = { from_name: "", from_email: "", subject: "", message: "" };
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
 
 function validate({ from_name, from_email, subject, message }) {
   if (!from_name.trim())                                return "Please enter your name.";
@@ -28,7 +16,6 @@ function validate({ from_name, from_email, subject, message }) {
 }
 
 export default function Contact() {
-  const formRef = useRef(null);
   const [fields, setFields]   = useState(INITIAL);
   const [errors, setErrors]   = useState({});
   const [status, setStatus]   = useState("idle"); // idle | loading | success | error
@@ -75,19 +62,32 @@ export default function Contact() {
     setErrMsg("");
 
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_PUBLIC_KEY
-      );
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: fields.from_name,
+          email: fields.from_email,
+          subject: fields.subject,
+          message: fields.message,
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result?.message || "Something went wrong. Please try again or email me directly.");
+      }
+
       setStatus("success");
       setFields(INITIAL);
       setErrors({});
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error("Contact API error:", err);
       setStatus("error");
-      setErrMsg("Something went wrong. Please try again or email me directly.");
+      setErrMsg(err?.message || "Something went wrong. Please try again or email me directly.");
     }
   };
 
@@ -198,7 +198,6 @@ export default function Contact() {
                 /* ── FORM STATE ── */
                 <motion.form
                   key="form"
-                  ref={formRef}
                   onSubmit={handleSubmit}
                   noValidate
                   initial={{ opacity: 0 }}
