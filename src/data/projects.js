@@ -21,36 +21,6 @@ export const projects = [
     githubUrl: "https://github.com/temesgenmeharie/ToDoList.git",
     liveUrl: "https://todolist-three-olive-11.vercel.app",
     hasVideo: false,
-  },
-  {
-    id: 3,
-    title: "Academic and Online Exam Management System",
-    description: "A comprehensive academic and online examination management system designed to streamline school operations, manage student assessments, and facilitate secure online testing with automated grading and performance analytics.",
-    image: "https://placehold.co/600x300/e2e8f0/64748b?text=Academic+System",
-    tags: ["React", "Node.js", "MongoDB"],
-    githubUrl: "https://github.com/temesgenmeharie",
-    liveUrl: null,
-    hasVideo: false,
-  },
-  {
-    id: 4,
-    title: "E-Commerce Application",
-    description: "A full-stack e-commerce platform built with Flutter and Supabase. A comprehensive online store with payment integration and admin dashboard.",
-    image: "https://placehold.co/600x300/e2e8f0/64748b?text=E-Commerce+App",
-    tags: ["Flutter", "Supabase"],
-    githubUrl: "https://github.com/temesgenmeharie",
-    liveUrl: null,
-    hasVideo: true,
-  },
-  {
-    id: 5,
-    title: "Job Portal",
-    description: "A modern job portal built with React, TypeScript, Tailwind CSS, and Supabase. Includes authentication, data persistence, and a responsive UI for browsing and managing job listings.",
-    image: "https://placehold.co/600x300/e2e8f0/64748b?text=Job+Portal",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
-    githubUrl: "https://github.com/temesgenmeharie",
-    liveUrl: null,
-    hasVideo: true,
   }
 ];
 
