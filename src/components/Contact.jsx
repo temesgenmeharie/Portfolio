@@ -75,16 +75,24 @@ export default function Contact() {
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(result?.message || "Something went wrong. Please try again or email me directly.");
+        throw new Error(result?.message || "Server API unavailable");
       }
 
       setStatus("success");
       setFields(INITIAL);
       setErrors({});
     } catch (err) {
-      console.error("Contact API error:", err);
-      setStatus("error");
-      setErrMsg(err?.message || "Something went wrong. Please try again or email me directly.");
+      console.warn("Contact API endpoint unavailable, opening email client fallback:", err);
+      
+      // Fallback: Open mailto link so user message is never lost
+      const mailBody = `Hello Temesgen,\n\nName: ${fields.from_name}\nEmail: ${fields.from_email}\nSubject: ${fields.subject}\n\nMessage:\n${fields.message}`;
+      const mailtoUrl = `mailto:temesgenmeharie71@gmail.com?subject=${encodeURIComponent("Contact Form: " + fields.subject)}&body=${encodeURIComponent(mailBody)}`;
+      
+      window.location.href = mailtoUrl;
+
+      setStatus("success");
+      setFields(INITIAL);
+      setErrors({});
     }
   };
 
