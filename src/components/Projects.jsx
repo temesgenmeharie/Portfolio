@@ -1,30 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FiGithub, FiBox } from "react-icons/fi";
-
-const PLACEHOLDER_PROJECTS = [
-  {
-    id: 1,
-    title: "Academic and Online Exam Management System",
-    description: "A comprehensive academic and online examination management system designed to streamline school operations, manage student assessments, and facilitate secure online testing with automated grading and performance analytics.",
-    image: "https://placehold.co/600x300/e2e8f0/64748b?text=Academic+System",
-    hasVideo: false,
-  },
-  {
-    id: 2,
-    title: "E-Commerce Application",
-    description: "A full-stack e-commerce platform built with Flutter, and Supabase. A comprehensive online store with payment integration and admin dashboard.",
-    image: "https://placehold.co/600x300/e2e8f0/64748b?text=E-Commerce+App",
-    hasVideo: true,
-  },
-  {
-    id: 3,
-    title: "Job Portal",
-    description: "A modern job portal built with React, TypeScript, Tailwind CSS, and Supabase. Includes authentication, data persistence, and a responsive UI for browsing and managing job listings.",
-    image: "https://placehold.co/600x300/e2e8f0/64748b?text=Job+Portal",
-    hasVideo: true,
-  }
-];
+import { FiGithub, FiBox, FiExternalLink } from "react-icons/fi";
+import projects from "../data/projects";
 
 export default function Projects() {
   return (
@@ -43,14 +20,14 @@ export default function Projects() {
 
         {/* Project Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {PLACEHOLDER_PROJECTS.map((project, i) => (
+          {projects.map((project, i) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white dark:bg-[var(--card-bg)] rounded-[20px] p-6 shadow-sm flex flex-col group h-full border border-gray-100 dark:border-white/5"
+              className="bg-white dark:bg-[var(--card-bg)] rounded-[20px] p-6 shadow-sm flex flex-col group h-full border border-gray-100 dark:border-white/5 hover:shadow-md transition-shadow"
             >
               {/* Card Header */}
               <div className="flex items-center gap-3 mb-4">
@@ -63,9 +40,23 @@ export default function Projects() {
               </div>
 
               {/* Description */}
-              <p className="text-gray-500 dark:text-[var(--text-muted)] text-xs mb-5 flex-grow leading-relaxed">
+              <p className="text-gray-500 dark:text-[var(--text-muted)] text-xs mb-4 flex-grow leading-relaxed">
                 {project.description}
               </p>
+
+              {/* Tech Stack Badges */}
+              {project.tags && project.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.tags.map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/30"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               {/* Image Area */}
               <div className="w-full h-[180px] bg-gray-100 rounded-lg mb-5 overflow-hidden">
@@ -78,11 +69,27 @@ export default function Projects() {
 
               {/* Card Footer */}
               <div className="flex items-center justify-between mt-auto">
-                <a href="#" className="w-8 h-8 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center hover:bg-gray-800 transition-colors">
+                <a
+                  href={project.githubUrl || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View GitHub Repository"
+                  className="w-8 h-8 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                >
                   <FiGithub size={16} />
                 </a>
                 
                 <div className="flex gap-2">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-blue-600 text-white text-[11px] px-3 py-2 rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-md flex items-center gap-1"
+                    >
+                      Live Demo <FiExternalLink size={12} />
+                    </a>
+                  )}
                   {project.hasVideo && (
                     <button className="bg-black dark:bg-white text-white dark:text-black text-[11px] px-4 py-2 rounded-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors shadow-md">
                       View in Video
@@ -108,3 +115,4 @@ export default function Projects() {
     </section>
   );
 }
+
