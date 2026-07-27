@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   SiReact, SiCss3, SiTailwindcss, SiJavascript,
-  SiPhp, SiPython, SiNodedotjs, SiExpress,
+  SiPython, SiNodedotjs, SiExpress,
   SiPostgresql, SiDocker, SiMysql, SiFirebase, SiSupabase,
   SiGit, SiGithub
 } from "react-icons/si";
@@ -25,7 +25,7 @@ const TECHNICAL_SKILLS = [
     icon: SiNodedotjs,
     iconColor: "#339933",
     skills: [
-      { name: "PHP", icon: SiPhp, color: "#777BB4", textColor: "#777BB4" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", textColor: "#336791" },
       { name: "Python", icon: SiPython, color: "#3776AB", textColor: "#3776AB" },
       { name: "Node.js", icon: SiNodedotjs, color: "#339933", textColor: "#339933" },
       { name: "Express", icon: SiExpress, color: "#68A063", textColor: "#3d6b3b" },

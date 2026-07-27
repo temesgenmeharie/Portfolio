@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FiDownload } from "react-icons/fi";
 import {
   SiReact, SiHtml5, SiCss3, SiTailwindcss, SiJavascript,
-  SiNodedotjs, SiExpress, SiPhp, SiMysql, SiFlutter
+  SiNodedotjs, SiExpress, SiPostgresql, SiMysql, SiFlutter
 } from "react-icons/si";
 
 const TECH_BADGES = [
@@ -15,7 +15,7 @@ const TECH_BADGES = [
   { name: "Node.js",     icon: SiNodedotjs,  color: "#339933", labelColor: "#166534",  bg: "rgba(51, 153, 51, 0.1)",    border: "rgba(51, 153, 51, 0.25)" },
   { name: "Express.js",  icon: SiExpress,    color: "#555555", labelColor: "#374151",  bg: "rgba(100, 100, 100, 0.1)",  border: "rgba(100, 100, 100, 0.2)",
     colorDark: "#FFFFFF", labelColorDark: "rgba(255,255,255,0.85)" },
-  { name: "PHP",         icon: SiPhp,        color: "#777BB4", labelColor: "#4c4d8a",  bg: "rgba(119, 123, 180, 0.1)",  border: "rgba(119, 123, 180, 0.25)" },
+  { name: "PostgreSQL",  icon: SiPostgresql, color: "#4169E1", labelColor: "#2563eb",  bg: "rgba(65, 105, 225, 0.1)",  border: "rgba(65, 105, 225, 0.25)" },
   { name: "MySQL",       icon: SiMysql,      color: "#00758F", labelColor: "#005f73",  bg: "rgba(0, 117, 143, 0.1)",    border: "rgba(0, 117, 143, 0.25)" },
   { name: "Flutter",     icon: SiFlutter,    color: "#02569B", labelColor: "#02569B",  bg: "rgba(2, 86, 155, 0.1)",     border: "rgba(2, 86, 155, 0.25)" },
 ];
