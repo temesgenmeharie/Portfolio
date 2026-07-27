@@ -34,7 +34,7 @@ export default function About() {
 
             <div className="text-[var(--text-muted)] space-y-5 text-lg leading-relaxed font-medium">
               <p>
-                Hello! I'm Temesgen, a Full-Stack Software Developer and Web Developer passionate about building secure, scalable, and user-friendly digital solutions.
+                Hello! I'm Temesgen, a Full-Stack Software Developer passionate about building secure, scalable, and user-friendly digital solutions.
                 Currently, I work as a Software Engineer, developing web and mobile applications. I enjoy transforming complex challenges into simple, effective solutions using modern technologies such as React, Node.js, Flutter, PostgreSQL, and MongoDB.
                 My focus is on writing clean, maintainable code, optimizing performance, and creating impactful products that deliver real value to users.
               </p>
