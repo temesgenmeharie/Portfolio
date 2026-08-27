@@ -115,3 +115,75 @@
 .animate-pulse-glow {
   animation: pulse-glow 4s ease-in-out infinite;
 }
+
+/* ── Marquee / Showcase Gallery ──────────────────────────────────────────── */
+
+/* Scrolls a track of images continuously left */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover so users can inspect a screenshot */
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Soft edge fade so the strip feels infinite */
+.marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--card-bg), transparent);
+}
+
+.marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--card-bg), transparent);
+}
+
+/* ShowcaseModal backdrop */
+.showcase-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Tech-stack pill groups inside modal */
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
