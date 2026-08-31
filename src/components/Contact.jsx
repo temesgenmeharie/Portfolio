@@ -6,20 +6,20 @@ const INITIAL = { from_name: "", from_email: "", subject: "", message: "" };
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
 
 function validate({ from_name, from_email, subject, message }) {
-  if (!from_name.trim())                                return "Please enter your name.";
-  if (!from_email.trim())                               return "Please enter your email.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from_email))  return "Please enter a valid email address.";
-  if (!subject.trim())                                  return "Please enter a subject.";
-  if (!message.trim())                                  return "Please enter your message.";
-  if (message.trim().length < 10)                       return "Message must be at least 10 characters.";
+  if (!from_name.trim()) return "Please enter your name.";
+  if (!from_email.trim()) return "Please enter your email.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from_email)) return "Please enter a valid email address.";
+  if (!subject.trim()) return "Please enter a subject.";
+  if (!message.trim()) return "Please enter your message.";
+  if (message.trim().length < 10) return "Message must be at least 10 characters.";
   return null;
 }
 
 export default function Contact() {
-  const [fields, setFields]   = useState(INITIAL);
-  const [errors, setErrors]   = useState({});
-  const [status, setStatus]   = useState("idle"); // idle | loading | success | error
-  const [errMsg, setErrMsg]   = useState("");
+  const [fields, setFields] = useState(INITIAL);
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [errMsg, setErrMsg] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -82,17 +82,9 @@ export default function Contact() {
       setFields(INITIAL);
       setErrors({});
     } catch (err) {
-      console.warn("Contact API endpoint unavailable, opening email client fallback:", err);
-      
-      // Fallback: Open mailto link so user message is never lost
-      const mailBody = `Hello Temesgen,\n\nName: ${fields.from_name}\nEmail: ${fields.from_email}\nSubject: ${fields.subject}\n\nMessage:\n${fields.message}`;
-      const mailtoUrl = `mailto:temesgenmeharie71@gmail.com?subject=${encodeURIComponent("Contact Form: " + fields.subject)}&body=${encodeURIComponent(mailBody)}`;
-      
-      window.location.href = mailtoUrl;
-
-      setStatus("success");
-      setFields(INITIAL);
-      setErrors({});
+      console.error("Contact form error:", err);
+      setStatus("error");
+      setErrMsg(err?.message || "Failed to send message. Please try again later.");
     }
   };
 
@@ -138,14 +130,14 @@ export default function Contact() {
                 </div>
                 <h3 className="font-bold text-xl text-slate-900 dark:text-white transition-colors duration-300">Contact Details</h3>
               </div>
-              
+
               <div className="flex items-center gap-4 pl-1">
                 <div className="p-2.5 bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 rounded-xl shrink-0">
                   <FiPhone size={18} />
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium text-sm md:text-base transition-colors duration-300">+2519 85250001</p>
               </div>
-              
+
               <div className="flex items-center gap-4 pl-1">
                 <div className="p-2.5 bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 rounded-xl shrink-0">
                   <FiMail size={18} />
@@ -162,7 +154,7 @@ export default function Contact() {
                 </div>
                 <h3 className="font-bold text-xl text-slate-900 dark:text-white transition-colors duration-300">Location</h3>
               </div>
-              
+
               <div className="flex items-center gap-4 pl-1">
                 <div className="p-2.5 bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 rounded-xl shrink-0">
                   <FiMapPin size={18} />
@@ -229,11 +221,10 @@ export default function Contact() {
                       onBlur={handleBlur}
                       placeholder="Your Name *"
                       disabled={isLoading}
-                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all text-sm ${
-                        errors.from_name
+                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all text-sm ${errors.from_name
                           ? "border-red-400 dark:border-red-500"
                           : "border-gray-200 dark:border-white/10 focus:border-blue-500 dark:focus:border-blue-400"
-                      }`}
+                        }`}
                     />
                     {errors.from_name && (
                       <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
@@ -253,11 +244,10 @@ export default function Contact() {
                       onBlur={handleBlur}
                       placeholder="Your Email *"
                       disabled={isLoading}
-                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all text-sm ${
-                        errors.from_email
+                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all text-sm ${errors.from_email
                           ? "border-red-400 dark:border-red-500"
                           : "border-gray-200 dark:border-white/10 focus:border-blue-500 dark:focus:border-blue-400"
-                      }`}
+                        }`}
                     />
                     {errors.from_email && (
                       <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
@@ -277,11 +267,10 @@ export default function Contact() {
                       onBlur={handleBlur}
                       placeholder="Subject *"
                       disabled={isLoading}
-                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all text-sm ${
-                        errors.subject
+                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all text-sm ${errors.subject
                           ? "border-red-400 dark:border-red-500"
                           : "border-gray-200 dark:border-white/10 focus:border-blue-500 dark:focus:border-blue-400"
-                      }`}
+                        }`}
                     />
                     {errors.subject && (
                       <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
@@ -301,11 +290,10 @@ export default function Contact() {
                       onBlur={handleBlur}
                       placeholder="Your Message *"
                       disabled={isLoading}
-                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all resize-none text-sm ${
-                        errors.message
+                      className={`w-full bg-slate-50 dark:bg-slate-900/80 border rounded-xl px-5 py-3.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all resize-none text-sm ${errors.message
                           ? "border-red-400 dark:border-red-500"
                           : "border-gray-200 dark:border-white/10 focus:border-blue-500 dark:focus:border-blue-400"
-                      }`}
+                        }`}
                     />
                     {errors.message && (
                       <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
