@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiGithub, FiLinkedin, FiTwitter, FiMoon, FiSun } from "react-icons/fi";
+import cvFile from "../assets/resume.pdf";
 
 const NAV_LINKS = [
   { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
-  { name: "Resume", href: "/resume.pdf", target: "_blank" },
+  { name: "Resume", href: cvFile, target: "_blank" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
@@ -87,8 +88,8 @@ export default function Navbar() {
                 rel={isPdf ? "noreferrer" : undefined}
                 download={isPdf ? "resume.pdf" : undefined}
                 className={`text-sm font-medium transition-all px-4 py-1.5 rounded-full ${isLinkActive && !isPdf
-                    ? "border border-emerald-600/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                    : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
+                  ? "border border-emerald-600/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                  : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
                   }`}
               >
                 {link.name}

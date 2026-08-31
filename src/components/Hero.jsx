@@ -5,6 +5,7 @@ import {
   SiReact, SiHtml5, SiCss3, SiTailwindcss, SiJavascript,
   SiNodedotjs, SiExpress, SiPostgresql, SiMysql, SiFlutter
 } from "react-icons/si";
+import cvFile from "../assets/resume.pdf";
 
 const TECH_BADGES = [
   { name: "React", icon: SiReact, color: "#61DAFB", labelColor: "#0ea5e9", bg: "rgba(97, 218, 251, 0.12)", border: "rgba(97, 218, 251, 0.25)" },
@@ -78,7 +79,7 @@ export default function Hero() {
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 mb-8">
             <a
-              href="/resume.pdf"
+              href={cvFile}
               target="_blank"
               rel="noreferrer"
               download="resume.pdf"
