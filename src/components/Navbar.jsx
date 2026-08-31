@@ -85,11 +85,11 @@ export default function Navbar() {
                 href={link.href}
                 target={isPdf ? "_blank" : undefined}
                 rel={isPdf ? "noreferrer" : undefined}
-                className={`text-sm font-medium transition-all px-4 py-1.5 rounded-full ${
-                  isLinkActive && !isPdf
+                download={isPdf ? "resume.pdf" : undefined}
+                className={`text-sm font-medium transition-all px-4 py-1.5 rounded-full ${isLinkActive && !isPdf
                     ? "border border-emerald-600/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
                     : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
-                }`}
+                  }`}
               >
                 {link.name}
               </a>

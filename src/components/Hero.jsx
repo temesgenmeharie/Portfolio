@@ -7,17 +7,19 @@ import {
 } from "react-icons/si";
 
 const TECH_BADGES = [
-  { name: "React",       icon: SiReact,      color: "#61DAFB", labelColor: "#0ea5e9",  bg: "rgba(97, 218, 251, 0.12)",  border: "rgba(97, 218, 251, 0.25)" },
-  { name: "HTML",        icon: SiHtml5,      color: "#E34F26", labelColor: "#E34F26",  bg: "rgba(227, 79, 38, 0.1)",    border: "rgba(227, 79, 38, 0.25)" },
-  { name: "CSS",         icon: SiCss3,       color: "#1572B6", labelColor: "#1572B6",  bg: "rgba(21, 114, 182, 0.1)",   border: "rgba(21, 114, 182, 0.25)" },
-  { name: "Tailwind",    icon: SiTailwindcss,color: "#38BDF8", labelColor: "#0284c7",  bg: "rgba(56, 189, 248, 0.1)",   border: "rgba(56, 189, 248, 0.25)" },
-  { name: "JavaScript",  icon: SiJavascript, color: "#F7DF1E", labelColor: "#b45309",  bg: "rgba(247, 223, 30, 0.1)",   border: "rgba(247, 223, 30, 0.25)" },
-  { name: "Node.js",     icon: SiNodedotjs,  color: "#339933", labelColor: "#166534",  bg: "rgba(51, 153, 51, 0.1)",    border: "rgba(51, 153, 51, 0.25)" },
-  { name: "Express.js",  icon: SiExpress,    color: "#555555", labelColor: "#374151",  bg: "rgba(100, 100, 100, 0.1)",  border: "rgba(100, 100, 100, 0.2)",
-    colorDark: "#FFFFFF", labelColorDark: "rgba(255,255,255,0.85)" },
-  { name: "PostgreSQL",  icon: SiPostgresql, color: "#4169E1", labelColor: "#2563eb",  bg: "rgba(65, 105, 225, 0.1)",  border: "rgba(65, 105, 225, 0.25)" },
-  { name: "MySQL",       icon: SiMysql,      color: "#00758F", labelColor: "#005f73",  bg: "rgba(0, 117, 143, 0.1)",    border: "rgba(0, 117, 143, 0.25)" },
-  { name: "Flutter",     icon: SiFlutter,    color: "#02569B", labelColor: "#02569B",  bg: "rgba(2, 86, 155, 0.1)",     border: "rgba(2, 86, 155, 0.25)" },
+  { name: "React", icon: SiReact, color: "#61DAFB", labelColor: "#0ea5e9", bg: "rgba(97, 218, 251, 0.12)", border: "rgba(97, 218, 251, 0.25)" },
+  { name: "HTML", icon: SiHtml5, color: "#E34F26", labelColor: "#E34F26", bg: "rgba(227, 79, 38, 0.1)", border: "rgba(227, 79, 38, 0.25)" },
+  { name: "CSS", icon: SiCss3, color: "#1572B6", labelColor: "#1572B6", bg: "rgba(21, 114, 182, 0.1)", border: "rgba(21, 114, 182, 0.25)" },
+  { name: "Tailwind", icon: SiTailwindcss, color: "#38BDF8", labelColor: "#0284c7", bg: "rgba(56, 189, 248, 0.1)", border: "rgba(56, 189, 248, 0.25)" },
+  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", labelColor: "#b45309", bg: "rgba(247, 223, 30, 0.1)", border: "rgba(247, 223, 30, 0.25)" },
+  { name: "Node.js", icon: SiNodedotjs, color: "#339933", labelColor: "#166534", bg: "rgba(51, 153, 51, 0.1)", border: "rgba(51, 153, 51, 0.25)" },
+  {
+    name: "Express.js", icon: SiExpress, color: "#555555", labelColor: "#374151", bg: "rgba(100, 100, 100, 0.1)", border: "rgba(100, 100, 100, 0.2)",
+    colorDark: "#FFFFFF", labelColorDark: "rgba(255,255,255,0.85)"
+  },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1", labelColor: "#2563eb", bg: "rgba(65, 105, 225, 0.1)", border: "rgba(65, 105, 225, 0.25)" },
+  { name: "MySQL", icon: SiMysql, color: "#00758F", labelColor: "#005f73", bg: "rgba(0, 117, 143, 0.1)", border: "rgba(0, 117, 143, 0.25)" },
+  { name: "Flutter", icon: SiFlutter, color: "#02569B", labelColor: "#02569B", bg: "rgba(2, 86, 155, 0.1)", border: "rgba(2, 86, 155, 0.25)" },
 ];
 
 export default function Hero() {
@@ -79,6 +81,7 @@ export default function Hero() {
               href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
+              download="resume.pdf"
               className="px-6 py-2.5 bg-slate-800 border border-slate-600 text-white dark:bg-black dark:border-white/20 dark:hover:bg-white/10 dark:hover:border-white/40 hover:bg-slate-700 transition-all text-sm flex items-center gap-2 rounded-md"
             >
               <FiDownload />
@@ -96,8 +99,8 @@ export default function Hero() {
           <div className="flex flex-wrap gap-3 max-w-xl">
             {TECH_BADGES.map((badge, idx) => {
               const Icon = badge.icon;
-              const iconColor  = isDark && badge.colorDark      ? badge.colorDark      : badge.color;
-              const labelColor = isDark && badge.labelColorDark  ? badge.labelColorDark : badge.labelColor;
+              const iconColor = isDark && badge.colorDark ? badge.colorDark : badge.color;
+              const labelColor = isDark && badge.labelColorDark ? badge.labelColorDark : badge.labelColor;
               return (
                 <div
                   key={idx}
