@@ -46,10 +46,15 @@ export default function ShowcaseModal({ project, onClose }) {
 
   const { title, description, techStack, gallery, githubUrl, liveUrl, tags } = project;
 
-  // Duplicate gallery images so marquee looks seamless
-  const marqueeImages = gallery && gallery.length > 0
-    ? [...gallery, ...gallery]
-    : [];
+  // Duplicate gallery images so marquee looks seamless.
+  // For small galleries repeat enough times to fill the strip.
+  const marqueeImages = (() => {
+    if (!gallery || gallery.length === 0) return [];
+    const minItems = 8; // enough to fill the strip without gaps
+    const repeated = [];
+    while (repeated.length < minItems) repeated.push(...gallery);
+    return [...repeated, ...repeated]; // double for seamless loop
+  })();
 
   return (
     <AnimatePresence>

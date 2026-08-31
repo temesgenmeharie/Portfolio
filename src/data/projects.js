@@ -22,7 +22,7 @@ export const projects = [
     githubUrl: "https://github.com/temesgenmeharie/amazon-frontend-clone.git",
     liveUrl: "https://amazon-frontend-clone-phi.vercel.app",
     hasVideo: false,
-    gallery: [],
+    gallery: [amazonCloneImg],
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ export const projects = [
     githubUrl: "https://github.com/temesgenmeharie/ToDoList.git",
     liveUrl: "https://todolist-three-olive-11.vercel.app",
     hasVideo: false,
-    gallery: [],
+    gallery: [todolistImg],
   },
   {
     id: 3,
@@ -77,7 +77,7 @@ export const projects = [
     githubUrl: "https://github.com/temesgenmeharie",
     liveUrl: null,
     hasVideo: false,
-    gallery: [],
+    gallery: [chatappImg],
   },
 ];
 
